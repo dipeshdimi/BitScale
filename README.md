@@ -1,8 +1,28 @@
-# React + Vite
+## Live Deployment
+https://bit-scale-five.vercel.app/
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Requirements
 
-Currently, two official plugins are available:
+Ensure you have the following installed:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Node.js** (v14.18.0+)
+- **npm** or **yarn**
+
+## Getting Started
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/dipeshdimi/BitScale.git
+   ```
+
+2. Navigate to the project directory:
+   ```bash
+   cd BitScale
+   ```
+   
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
