@@ -54,13 +54,17 @@ const Table = () => {
 
   return (
     <>
-      <table className="w-full border-collapse text-[14px]">
+      <table className="w-full table-auto border-collapse text-[14px]">
         <thead>
           <tr className="bg-gray-100 text-left font-medium text-gray-700">
             <th className="py-1 px-2 w-8" />
             <th className="py-1 px-2 w-8" />
             {columns.map((col, index) => (
-              <th key={index} className={`${index === 0 && 'bg-[#FEF2C7]'} py-1 px-4`}>
+              <th
+                key={index}
+                className={`${index === 0 && 'bg-[#FEF2C7]'
+                  } py-1 px-4 min-w-[267px]`} // Set min-width for columns
+              >
                 <div className="flex items-center gap-2">
                   <img src={col.icon} alt={col.title} />
                   <span>{col.title}</span>
@@ -68,14 +72,9 @@ const Table = () => {
               </th>
             ))}
             <th className="py-1 px-2">
-              <div className="flex items-center gap-2">
-                <div
-                  className="flex items-center gap-2 cursor-pointer"
-                  onClick={handleColumnModalToggle}
-                >
-                  <FaPlus />
-                  <span>Add Column</span>
-                </div>
+              <div className="flex items-center gap-2 cursor-pointer" onClick={handleColumnModalToggle}>
+                <FaPlus />
+                <span>Add Column</span>
               </div>
             </th>
           </tr>
@@ -88,7 +87,11 @@ const Table = () => {
                 <FaRegPlayCircle className="text-[#525CE9]" />
               </td>
               {columns.map((col, colIndex) => (
-                <td key={colIndex} className="border py-1 px-2" style={{ maxWidth: '267px' }}>
+                <td
+                  key={colIndex}
+                  className="border py-1 px-2 min-w-[267px]" // Set min-width for table cells
+                  style={{ maxWidth: '267px' }}
+                >
                   <input
                     type="text"
                     value={row[col.key] || ''}
@@ -127,7 +130,6 @@ const Table = () => {
           </tr>
         </tbody>
       </table>
-
 
       {createNewCol && (
         <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">

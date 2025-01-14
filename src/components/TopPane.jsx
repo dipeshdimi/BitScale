@@ -16,7 +16,7 @@ const ToggleBar = ({autoSave, setAutoSave}) => {
         <div className={`block ${autoSave ? 'bg-[#0E9F6E]' : 'bg-gray-500'} w-10 h-6 rounded-full`}></div>
         <div
           className={`dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-all duration-200 ${autoSave && 'translate-x-4 b-blue-500'}`}
-        ></div>
+        />
       </label>
       <span className={`text-[14px] font-medium ${autoSave ? 'text-[#0E9F6E]' : 'text-gray-500'} ml-2`}>Auto Save</span>
     </div>

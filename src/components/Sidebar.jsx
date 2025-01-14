@@ -6,7 +6,7 @@ import { BiCoinStack } from "react-icons/bi";
 
 const Sidebar = () => {
   return (
-    <div className="min-w-16 bg-gray-100 flex flex-col justify-between py-4 border-r">
+    <div className="w-16 px-4 bg-gray-100 flex flex-col justify-between py-4 border-r">
       <div className="flex flex-col items-center space-y-4">
         <button className="text-gray-700 hover:text-blue-600">
           <TbTableDashed className="w-6 h-6"/>

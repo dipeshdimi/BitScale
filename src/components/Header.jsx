@@ -10,9 +10,9 @@ import { tableData, colData } from "../const/data";
 
 const Header = () => {
   return (
-    <div className="flex sm:flex-col items-center sm:items-start sm:gap-2 justify-between px-4 py-3 border-b bg-white">
+    <div className="flex sm:flex-col items-center sm:items-start sm:gap-2 justify-between px-4 py-3 border-b bg-white w-full">
       <div className="flex lg:flex-col items-center lg:items-start gap-x-6 gap-y-1">
-        <div className="flex items-center gap-2 px-2 bg-gray-50 border border-gray-300 rounded-lg min-w-80">
+        <div className="flex items-center gap-2 px-2 bg-gray-50 border border-gray-300 rounded-lg w-80 md:w-full">
           <IoMdSearch className="w-4 h-4" />
           <input
             type="text"
@@ -20,7 +20,7 @@ const Header = () => {
             className="w-full text-[14px] text-gray-500 bg-transparent pl-1 py-1 outline-none"
           />
         </div>
-        <div className="text-[12px] text-gray-800 flex items-center gap-2 font-medium">
+        <div className="text-[12px] text-gray-800 flex flex-wrap items-center gap-2 font-medium">
           <div className="flex items-center gap-1 pr-2 lg:pr-1">
             <MdOutlineTableRows className="w-4 h-4"/>
             <span>{tableData.length}/{tableData.length} Row</span>
@@ -39,6 +39,7 @@ const Header = () => {
           </div>
         </div>
       </div>
+
       <div className="flex items-center gap-1">
         <button className="flex items-center gap-1 bg-gray-800 text-white text-[12px] font-medium py-2 px-3 rounded-lg hover:bg-gray-900 mr-3 md:mr-2">
           <HiOutlineSparkles />

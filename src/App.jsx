@@ -8,12 +8,11 @@ function App() {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <TopPane autoSave={autoSave} setAutoSave={setAutoSave} />
 
-      <div className="flex flex-1">
+      <div className='flex flex-1'>
         <Sidebar />
-
-        <div className="flex-1">
-          <div className="bg-white rounded-md shadow-lg">
-            <Header />
+        <div className="overflow-hidden bg-white rounded-md shadow-lg flex flex-1 flex-col">
+          <Header />
+          <div className='overflow-auto flex-1'>
             <Table />
           </div>
         </div>
