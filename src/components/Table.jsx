@@ -71,7 +71,7 @@ const Table = ({ tabData, columns, setTabData, setColumns, searchTerm, reverse }
                   } py-1 px-4 min-w-[267px]`}
               >
                 <div className="flex items-center gap-2">
-                  <img src={col.icon} alt="" />
+                  <img src={col.icon} alt="" className="w-5 h-5" />
                   <span>{col.title}</span>
                 </div>
               </th>
