@@ -84,7 +84,7 @@ const Table = ({ tabData, columns, setTabData, setColumns, searchTerm, reverse }
             </th>
           </tr>
         </thead>
-        {tabData.length > 0 && <tbody className="text-gray-600">
+        {tabData.length > 0 ? <tbody className="text-gray-600">
           {(reverse ? filteredTabData.slice().reverse() : filteredTabData).map((row, rowIndex) => (
             <tr key={rowIndex} className={rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
               <td className="border py-1 px-2 w-8 text-[12px]">{rowIndex + 1}</td>
@@ -134,12 +134,29 @@ const Table = ({ tabData, columns, setTabData, setColumns, searchTerm, reverse }
 
             <td className="border px-4" />
           </tr>
-        </tbody>}
+        </tbody>
+          :
+          (columns.length > 0 &&
+            <div
+              className="ml-4 mt-2 flex gap-2 items-center cursor-pointer text-[12px] py-2 px-4 font-medium bg-gray-800 text-white rounded-md shadow hover:bg-gray-900 transition-all duration-200"
+              onClick={() => {
+                setTabData([
+                  ...tabData,
+                  columns.reduce((acc, col) => ({ ...acc, [col.key]: '' }), {}),
+                ]);
+              }}
+            >
+              <FaPlus className="text-white" />
+              <span className="text-nowrap">Add Row</span>
+            </div>
+          )
+        }
+
       </table>
 
       {createNewCol && (
         <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-[400px]">
+          <div className="bg-white px-12 py-6 md:px-6 rounded-lg shadow-lg max-w-[400px] sm:w-[90%]">
             <h3 className="text-xl font-semibold mb-4">Add New Column</h3>
             <div className="mb-4">
               <label className="block text-sm font-medium mb-1">Column Name</label>
@@ -177,14 +194,15 @@ const Table = ({ tabData, columns, setTabData, setColumns, searchTerm, reverse }
             <div className="flex justify-end gap-2">
               <button
                 onClick={handleColumnModalToggle}
-                className="text-gray-600 bg-gray-300 p-2 rounded-md"
+                className="text-gray-800 bg-gray-200 p-2 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 active:bg-gray-400 transition duration-200"
               >
                 Cancel
               </button>
+
               <button
                 onClick={onAddColumn}
                 disabled={!colName || !colKey}
-                className="text-white bg-green-500 p-2 rounded-md disabled:bg-gray-300"
+                className="text-white bg-green-500 p-2 rounded-md disabled:bg-gray-300 disabled:text-gray-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 active:bg-green-700 transition duration-200"
               >
                 Add Column
               </button>
