@@ -1,17 +1,22 @@
-import { FaPlus, FaRegPlayCircle } from "react-icons/fa";
 import { useState } from "react";
-import { tableData, colData } from "../const/data";
+import PropTypes from "prop-types";
+import {
+  FaPlus,
+  FaRegPlayCircle
+} from '../icons';
 
-
-const Table = () => {
-  const [tabData, setTabData] = useState(tableData);
-  const [columns, setColumns] = useState(colData);
-
+const Table = ({ tabData, columns, setTabData, setColumns, searchTerm, reverse }) => {
   const [createNewCol, setCreateNewCol] = useState(false);
   const [colName, setColName] = useState('');
   const [colKey, setColKey] = useState('');
   const [colIcon, setColIcon] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+  const filteredTabData = tabData.filter((row) =>
+    columns.some((col) =>
+      String(row[col.key]).toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  );
 
   const isColumnKeyUnique = (key) => {
     return !columns.some(col => col.key === key);
@@ -54,7 +59,7 @@ const Table = () => {
 
   return (
     <>
-      <table className="w-full table-auto border-collapse text-[14px]">
+      <table id="data-table" className="w-full table-auto border-collapse text-[14px]">
         <thead>
           <tr className="bg-gray-100 text-left font-medium text-gray-700">
             <th className="py-1 px-2 w-8" />
@@ -63,10 +68,10 @@ const Table = () => {
               <th
                 key={index}
                 className={`${index === 0 && 'bg-[#FEF2C7]'
-                  } py-1 px-4 min-w-[267px]`} // Set min-width for columns
+                  } py-1 px-4 min-w-[267px]`}
               >
                 <div className="flex items-center gap-2">
-                  <img src={col.icon} alt={col.title} />
+                  <img src={col.icon} alt="" />
                   <span>{col.title}</span>
                 </div>
               </th>
@@ -79,8 +84,8 @@ const Table = () => {
             </th>
           </tr>
         </thead>
-        <tbody className="text-gray-600">
-          {tabData.map((row, rowIndex) => (
+        {tabData.length > 0 && <tbody className="text-gray-600">
+          {(reverse ? filteredTabData.slice().reverse() : filteredTabData).map((row, rowIndex) => (
             <tr key={rowIndex} className={rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
               <td className="border py-1 px-2 w-8 text-[12px]">{rowIndex + 1}</td>
               <td className="border py-1 px-2 w-8">
@@ -89,7 +94,7 @@ const Table = () => {
               {columns.map((col, colIndex) => (
                 <td
                   key={colIndex}
-                  className="border py-1 px-2 min-w-[267px]" // Set min-width for table cells
+                  className="border py-1 px-2 min-w-[267px] focus-within:bg-blue-100"
                   style={{ maxWidth: '267px' }}
                 >
                   <input
@@ -108,7 +113,7 @@ const Table = () => {
             </tr>
           ))}
           <tr>
-            {columns.map((col, colIndex) => (
+            {Array.from({ length: columns.length + 2 }).map((_, colIndex) => (
               <td key={colIndex} className="border px-4">
                 {colIndex === 2 && (
                   <div
@@ -126,9 +131,10 @@ const Table = () => {
                 )}
               </td>
             ))}
+
             <td className="border px-4" />
           </tr>
-        </tbody>
+        </tbody>}
       </table>
 
       {createNewCol && (
@@ -188,6 +194,27 @@ const Table = () => {
       )}
     </>
   );
+};
+
+Table.propTypes = {
+  tabData: PropTypes.arrayOf(
+    PropTypes.shape({
+      input: PropTypes.string.isRequired,
+      action: PropTypes.string.isRequired,
+      enrich: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  columns: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      icon: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  setTabData: PropTypes.func.isRequired,
+  setColumns: PropTypes.func.isRequired,
+  searchTerm: PropTypes.string.isRequired,
+  reverse: PropTypes.bool.isRequired,
 };
 
 export default Table;
