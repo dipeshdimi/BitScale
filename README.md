@@ -26,3 +26,8 @@ Ensure you have the following installed:
    ```bash
    npm install
    ```
+
+4. Run the application:
+   ```bash
+   npm run dev
+   ```
